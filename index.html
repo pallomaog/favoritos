@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meus Favoritos ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF8F4;
+    --warm-white: #FFFDF9;
+    --sand: #E8E2D9;
+    --taupe: #B8A99A;
+    --brown: #6B5B4E;
+    --dark: #2A1F1A;
+    --accent: #C4956A;
+    --accent-light: #F0E4D5;
+    --text: #3D2E26;
+    --text-muted: #8C7B70;
+    --card-bg: #FFFFFF;
+    --shadow: 0 2px 20px rgba(42,31,26,0.06);
+    --shadow-hover: 0 8px 40px rgba(42,31,26,0.14);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ─── HEADER ─── */
+  .hero {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--sand);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, #F0E4D5 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .avatar-wrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-light), var(--sand));
+    border: 3px solid var(--accent);
+    margin: 0 auto 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--accent);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-handle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-bio {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-top: 0.9rem;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    background: var(--accent-light);
+    color: var(--brown);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, color 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .social-btn:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* ─── NAV ─── */
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand);
+    padding: 0 1.5rem;
+  }
+
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ─── MAIN ─── */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 70px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .section-emoji {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+
+  /* ─── GRID ─── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--sand);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card-img-wrap {
+    aspect-ratio: 3/4;
+    background: var(--accent-light);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover .card-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--taupe);
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--sand) 100%);
+  }
+
+  .card-body {
+    padding: 0.85rem 0.9rem 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .card-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.35;
+  }
+
+  .card-author {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .coupon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    background: var(--accent-light);
+    color: var(--brown);
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+    letter-spacing: 0.03em;
+    border: 1px solid rgba(196,149,106,0.3);
+    align-self: flex-start;
+  }
+
+  .no-link-tag {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .shop-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--dark);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .shop-btn:hover { background: var(--accent); }
+
+  .card-no-link .shop-btn {
+    background: var(--sand);
+    color: var(--text-muted);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* ─── EDIT BANNER ─── */
+  .edit-banner {
+    background: linear-gradient(135deg, var(--accent-light), #FAEEE0);
+    border: 1px dashed var(--accent);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edit-banner-icon { font-size: 1.5rem; }
+
+  .edit-banner-text {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--brown);
+    min-width: 200px;
+  }
+
+  .edit-banner-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .edit-btn {
+    padding: 0.5rem 1.1rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .edit-btn:hover { opacity: 0.85; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(42,31,26,0.5);
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--warm-white);
+    border-radius: var(--radius);
+    padding: 2rem;
+    width: 100%;
+    max-width: 560px;
+    margin: auto;
+    position: relative;
+    border: 1px solid var(--sand);
+  }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--taupe);
+    line-height: 1;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--sand);
+    border-radius: var(--radius-sm);
+    background: white;
+    color: var(--dark);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+
+  .btn-cancel {
+    padding: 0.6rem 1.2rem;
+    background: var(--sand);
+    color: var(--text-muted);
+    border: none;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-save {
+    padding: 0.6rem 1.4rem;
+    background: var(--dark);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+
+  .btn-save:hover { background: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--sand);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeUp 0.5s ease both; }
+  .section:nth-child(2) { animation-delay: 0.05s; }
+  .section:nth-child(3) { animation-delay: 0.10s; }
+  .section:nth-child(4) { animation-delay: 0.15s; }
+  .section:nth-child(5) { animation-delay: 0.20s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hero">
+  <div class="avatar-wrap" id="avatarWrap">
+    <!-- Coloque sua foto aqui: substitua o emoji pelo conteúdo abaixo
+    <img src="SUA-FOTO.jpg" alt="Foto de perfil"> -->
+    ✨
+  </div>
+  <h1 class="hero-name" id="heroName">Seu Nome</h1>
+  <p class="hero-handle" id="heroHandle">@seu.arroba</p>
+  <p class="hero-bio" id="heroBio">Tudo que uso, amo e indico no meu dia a dia 🤍</p>
+  <div class="social-links">
+    <a class="social-btn" href="https://instagram.com/" target="_blank" id="instaLink">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a class="social-btn" href="https://tiktok.com/" target="_blank" id="tiktokLink">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>
+      TikTok
+    </a>
+    <a class="social-btn" href="https://youtube.com/" target="_blank" id="youtubeLink">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19a2.74 2.74 0 0 0-1.93-1.93C18 5 12 5 12 5s-6 0-7.65.26a2.74 2.74 0 0 0-1.93 1.93C2.16 8.85 2.16 12 2.16 12s0 3.15.26 4.81a2.74 2.74 0 0 0 1.93 1.93C6 19 12 19 12 19s6 0 7.65-.26a2.74 2.74 0 0 0 1.93-1.93c.26-1.66.26-4.81.26-4.81s0-3.15-.26-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+      YouTube
+    </a>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <div class="nav-inner" id="navInner"></div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <div class="edit-banner">
+    <span class="edit-banner-icon">✏️</span>
+    <div class="edit-banner-text">
+      <strong>Personalize seu site</strong>
+      Adicione seus produtos, livros e indicações facilmente
+    </div>
+    <button class="edit-btn" onclick="openAddModal()">+ Adicionar item</button>
+  </div>
+
+  <div id="sectionsContainer"></div>
+
+</main>
+
+<footer>
+  <p>© 2026 · Feito com 🤍</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 class="modal-title" id="modalTitle">Adicionar item</h2>
+
+    <div class="form-group">
+      <label>Categoria</label>
+      <select id="itemCategory">
+        <option value="">Selecione ou crie uma categoria…</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="newCatGroup" style="display:none;">
+      <label>Nome da nova categoria</label>
+      <input type="text" id="newCatName" placeholder="Ex: Cozinha, Fitness, Cursos…">
+    </div>
+
+    <div class="form-group" id="newCatEmojiGroup" style="display:none;">
+      <label>Emoji da categoria</label>
+      <input type="text" id="newCatEmoji" placeholder="Ex: 🍳">
+    </div>
+
+    <div class="form-group">
+      <label>Nome do produto / livro</label>
+      <input type="text" id="itemName" placeholder="Ex: Livro Atomic Habits">
+    </div>
+
+    <div class="form-group">
+      <label>Autor / marca (opcional)</label>
+      <input type="text" id="itemAuthor" placeholder="Ex: James Clear">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Cupom (opcional)</label>
+        <input type="text" id="itemCoupon" placeholder="SEUCUPOM">
+      </div>
+      <div class="form-group">
+        <label>Imagem URL (opcional)</label>
+        <input type="text" id="itemImage" placeholder="https://...">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Link do produto</label>
+      <input type="text" id="itemLink" placeholder="https://amzn.to/... (deixe vazio se não tiver)">
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-save" onclick="saveItem()">Salvar item</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DADOS INICIAIS ─────────────────────────────────────────────────────────
+const defaultData = {
+  profile: {
+    name: 'Seu Nome',
+    handle: '@seu.arroba',
+    bio: 'Tudo que uso, amo e indico no meu dia a dia 🤍',
+    instagram: 'https://instagram.com/',
+    tiktok: 'https://tiktok.com/',
+    youtube: 'https://youtube.com/'
+  },
+  sections: [
+    {
+      id: 'livros',
+      title: 'Livros',
+      emoji: '📚',
+      items: [
+        { id: 1, name: 'Atomic Habits', author: 'James Clear', link: 'https://amzn.to/3N2eLUq', coupon: '', image: '' },
+        { id: 2, name: 'O Poder do Hábito', author: 'Charles Duhigg', link: 'https://amzn.to/4cs7PKV', coupon: '', image: '' },
+        { id: 3, name: 'Essencialismo', author: 'Greg McKeown', link: '', coupon: '', image: '' },
+        { id: 4, name: 'A Arte de Fazer Acontecer', author: 'David Allen', link: 'https://amzn.to/4rIeRQa', coupon: '', image: '' }
+      ]
+    },
+    {
+      id: 'papelaria',
+      title: 'Papelaria',
+      emoji: '✍️',
+      items: [
+        { id: 5, name: 'Planner Favorito', author: '', link: 'https://www.studies.com.br', coupon: 'SEUNOME10', image: '' },
+        { id: 6, name: 'Caneta Brush', author: '', link: 'https://amzn.to/4l4LANk', coupon: '', image: '' },
+        { id: 7, name: 'Bloco de Notas A5', author: '', link: '', coupon: '', image: '' }
+      ]
+    },
+    {
+      id: 'tecnologia',
+      title: 'Tecnologia',
+      emoji: '💻',
+      items: [
+        { id: 8, name: 'Suporte para notebook', author: '', link: 'https://amzn.to/46BPRSh', coupon: '', image: '' },
+        { id: 9, name: 'Mousepad grande', author: '', link: 'https://amzn.to/40ow0mh', coupon: '', image: '' },
+        { id: 10, name: 'Fone sem fio', author: 'Sony', link: 'https://amzn.to/3Ncjjrx', coupon: '', image: '' }
+      ]
+    }
+  ]
+};
+
+// ─── ESTADO ─────────────────────────────────────────────────────────────────
+let data = JSON.parse(localStorage.getItem('favoritos_data') || 'null') || defaultData;
+let editingItemId = null;
+let editingSectionId = null;
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function render() {
+  renderProfile();
+  renderNav();
+  renderSections();
+}
+
+function renderProfile() {
+  const p = data.profile;
+  document.getElementById('heroName').textContent = p.name;
+  document.getElementById('heroHandle').textContent = p.handle;
+  document.getElementById('heroBio').textContent = p.bio;
+  document.getElementById('instaLink').href = p.instagram || 'https://instagram.com/';
+  document.getElementById('tiktokLink').href = p.tiktok || 'https://tiktok.com/';
+  document.getElementById('youtubeLink').href = p.youtube || 'https://youtube.com/';
+  document.getElementById('avatarWrap').innerHTML = p.avatar
+    ? `<img src="${p.avatar}" alt="Foto de perfil">`
+    : p.name.trim().charAt(0).toUpperCase() || '✨';
+}
+
+function renderNav() {
+  const nav = document.getElementById('navInner');
+  nav.innerHTML = data.sections.map(s =>
+    `<a class="nav-btn" href="#sec-${s.id}">${s.emoji} ${s.title}</a>`
+  ).join('');
+}
+
+function renderSections() {
+  const container = document.getElementById('sectionsContainer');
+  container.innerHTML = data.sections.map(section => `
+    <section class="section" id="sec-${section.id}">
+      <div class="section-header">
+        <span class="section-emoji">${section.emoji}</span>
+        <h2 class="section-title">${section.title}</h2>
+        <div style="margin-left:auto;display:flex;gap:.5rem;">
+          <button onclick="openAddModal('${section.id}')" style="background:var(--accent-light);color:var(--brown);border:none;border-radius:100px;padding:.3rem .8rem;font-size:.75rem;cursor:pointer;font-family:inherit;">+ Item</button>
+          <button onclick="deleteSection('${section.id}')" style="background:none;border:none;font-size:.9rem;cursor:pointer;color:var(--taupe);">🗑</button>
+        </div>
+      </div>
+      <div class="grid">
+        ${section.items.map(item => renderCard(item, section.id)).join('')}
+        <div class="card" onclick="openAddModal('${section.id}')" style="border:1.5px dashed var(--sand);background:transparent;min-height:220px;align-items:center;justify-content:center;gap:.5rem;">
+          <span style="font-size:1.8rem;color:var(--taupe);">+</span>
+          <span style="font-size:.78rem;color:var(--text-muted);">Adicionar</span>
+        </div>
+      </div>
+    </section>
+  `).join('');
+}
+
+function renderCard(item, sectionId) {
+  const hasLink = item.link && item.link.trim() !== '';
+  const imgContent = item.image
+    ? `<img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-placeholder>🛍️</div>'">`
+    : `<div class="card-img-placeholder">${getCategoryEmoji(sectionId)}</div>`;
+
+  return `
+    <div class="card ${hasLink ? '' : 'card-no-link'}" onclick="editItem('${sectionId}', ${item.id})" title="Clique para editar">
+      <div class="card-img-wrap">${imgContent}</div>
+      <div class="card-body">
+        <div class="card-name">${item.name}</div>
+        ${item.author ? `<div class="card-author">${item.author}</div>` : ''}
+        <div class="card-footer">
+          ${item.coupon ? `<span class="coupon-badge">🏷 ${item.coupon}</span>` : ''}
+          ${hasLink
+            ? `<a class="shop-btn" href="${item.link}" target="_blank" onclick="event.stopPropagation()">Ver produto →</a>`
+            : `<span class="no-link-tag">Sem link disponível</span>`}
+        </div>
+      </div>
+    </div>`;
+}
+
+function getCategoryEmoji(sectionId) {
+  const sec = data.sections.find(s => s.id === sectionId);
+  return sec ? sec.emoji : '✨';
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+function openAddModal(sectionId) {
+  editingItemId = null;
+  editingSectionId = sectionId || null;
+  document.getElementById('modalTitle').textContent = 'Adicionar item';
+  clearForm();
+  populateCategorySelect(sectionId);
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function editItem(sectionId, itemId) {
+  const section = data.sections.find(s => s.id === sectionId);
+  if (!section) return;
+  const item = section.items.find(i => i.id === itemId);
+  if (!item) return;
+  editingItemId = itemId;
+  editingSectionId = sectionId;
+  document.getElementById('modalTitle').textContent = 'Editar item';
+  populateCategorySelect(sectionId);
+  document.getElementById('itemName').value = item.name || '';
+  document.getElementById('itemAuthor').value = item.author || '';
+  document.getElementById('itemCoupon').value = item.coupon || '';
+  document.getElementById('itemImage').value = item.image || '';
+  document.getElementById('itemLink').value = item.link || '';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  editingItemId = null;
+  editingSectionId = null;
+}
+
+function clearForm() {
+  ['itemName','itemAuthor','itemCoupon','itemImage','itemLink','newCatName','newCatEmoji'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('newCatGroup').style.display = 'none';
+  document.getElementById('newCatEmojiGroup').style.display = 'none';
+}
+
+function populateCategorySelect(selectedId) {
+  const sel = document.getElementById('itemCategory');
+  sel.innerHTML = '<option value="">Selecione uma categoria…</option>';
+  data.sections.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.id;
+    opt.textContent = `${s.emoji} ${s.title}`;
+    if (s.id === selectedId) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  const newOpt = document.createElement('option');
+  newOpt.value = '__new__';
+  newOpt.textContent = '✨ Criar nova categoria';
+  sel.appendChild(newOpt);
+
+  sel.onchange = () => {
+    const isNew = sel.value === '__new__';
+    document.getElementById('newCatGroup').style.display = isNew ? '' : 'none';
+    document.getElementById('newCatEmojiGroup').style.display = isNew ? '' : 'none';
+  };
+}
+
+function saveItem() {
+  const name = document.getElementById('itemName').value.trim();
+  if (!name) { alert('Informe o nome do produto!'); return; }
+
+  let sectionId = document.getElementById('itemCategory').value;
+
+  // Criar nova seção se necessário
+  if (sectionId === '__new__') {
+    const newCatName = document.getElementById('newCatName').value.trim();
+    if (!newCatName) { alert('Informe o nome da categoria!'); return; }
+    const newEmoji = document.getElementById('newCatEmoji').value.trim() || '🌟';
+    sectionId = newCatName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    data.sections.push({ id: sectionId, title: newCatName, emoji: newEmoji, items: [] });
+  }
+
+  if (!sectionId) { alert('Selecione uma categoria!'); return; }
+
+  const section = data.sections.find(s => s.id === sectionId);
+  if (!section) return;
+
+  const itemData = {
+    id: editingItemId || Date.now(),
+    name,
+    author: document.getElementById('itemAuthor').value.trim(),
+    coupon: document.getElementById('itemCoupon').value.trim(),
+    image: document.getElementById('itemImage').value.trim(),
+    link: document.getElementById('itemLink').value.trim()
+  };
+
+  if (editingItemId) {
+    // Editar existente — remove da seção atual e adiciona na nova
+    data.sections.forEach(s => {
+      s.items = s.items.filter(i => i.id !== editingItemId);
+    });
+  }
+
+  section.items.push(itemData);
+  saveData();
+  closeModal();
+}
+
+function deleteSection(sectionId) {
+  if (!confirm('Deletar esta seção e todos os itens dela?')) return;
+  data.sections = data.sections.filter(s => s.id !== sectionId);
+  saveData();
+}
+
+function saveData() {
+  localStorage.setItem('favoritos_data', JSON.stringify(data));
+  render();
+}
+
+// ─── FECHAR MODAL AO CLICAR FORA ─────────────────────────────────────────────
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
