@@ -7,562 +7,131 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream: #FAF8F4;
-    --warm-white: #FFFDF9;
-    --sand: #E8E2D9;
-    --taupe: #B8A99A;
-    --brown: #6B5B4E;
-    --dark: #2A1F1A;
-    --accent: #C4956A;
-    --accent-light: #F0E4D5;
-    --text: #3D2E26;
-    --text-muted: #8C7B70;
-    --card-bg: #FFFFFF;
-    --shadow: 0 2px 20px rgba(42,31,26,0.06);
-    --shadow-hover: 0 8px 40px rgba(42,31,26,0.14);
-    --radius: 16px;
-    --radius-sm: 10px;
+    --cream: #FAF8F4; --warm-white: #FFFDF9; --sand: #E8E2D9; --taupe: #B8A99A;
+    --brown: #6B5B4E; --dark: #2A1F1A; --accent: #C4956A; --accent-light: #F0E4D5;
+    --text: #3D2E26; --text-muted: #8C7B70; --card-bg: #FFFFFF;
+    --shadow-hover: 0 8px 40px rgba(42,31,26,0.14); --radius: 16px; --radius-sm: 10px;
   }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; line-height: 1.6; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+  /* HERO */
+  .hero { background: var(--warm-white); border-bottom: 1px solid var(--sand); padding: 3rem 1.5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% -10%, #F0E4D5 0%, transparent 70%); pointer-events: none; }
+  .avatar-wrap { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-light), var(--sand)); border: 3px solid var(--accent); margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--accent); position: relative; z-index: 1; overflow: hidden; }
+  .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--dark); letter-spacing: -0.02em; position: relative; z-index: 1; }
+  .hero-handle { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.05em; margin-top: 0.25rem; position: relative; z-index: 1; }
+  .hero-bio { font-size: 0.92rem; color: var(--text-muted); margin-top: 0.9rem; max-width: 360px; margin-left: auto; margin-right: auto; font-style: italic; position: relative; z-index: 1; }
+  .social-links { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.4rem; position: relative; z-index: 1; flex-wrap: wrap; }
+  .social-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1rem; border-radius: 100px; background: var(--accent-light); color: var(--brown); font-size: 0.8rem; font-weight: 500; text-decoration: none; letter-spacing: 0.02em; transition: background 0.2s, color 0.2s; border: 1px solid transparent; }
+  .social-btn:hover { background: var(--accent); color: white; }
 
-  /* ─── HEADER ─── */
-  .hero {
-    background: var(--warm-white);
-    border-bottom: 1px solid var(--sand);
-    padding: 3rem 1.5rem 2.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% -10%, #F0E4D5 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .avatar-wrap {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-light), var(--sand));
-    border: 3px solid var(--accent);
-    margin: 0 auto 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.6rem;
-    font-weight: 300;
-    color: var(--accent);
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
-
-  .avatar-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 400;
-    color: var(--dark);
-    letter-spacing: -0.02em;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-handle {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-top: 0.25rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-bio {
-    font-size: 0.92rem;
-    color: var(--text-muted);
-    margin-top: 0.9rem;
-    max-width: 360px;
-    margin-left: auto;
-    margin-right: auto;
-    font-style: italic;
-    position: relative;
-    z-index: 1;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    margin-top: 1.4rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .social-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.45rem 1rem;
-    border-radius: 100px;
-    background: var(--accent-light);
-    color: var(--brown);
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: background 0.2s, color 0.2s;
-    border: 1px solid transparent;
-  }
-
-  .social-btn:hover {
-    background: var(--accent);
-    color: white;
-  }
-
-  /* ─── NAV ─── */
-  .nav-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(250,248,244,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--sand);
-    padding: 0 1.5rem;
-  }
-
-  .nav-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
+  /* NAV */
+  .nav-wrap { position: sticky; top: 0; z-index: 100; background: rgba(250,248,244,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--sand); padding: 0 1.5rem; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; align-items: center; }
   .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn { padding: 0.85rem 1.1rem; font-size: 0.8rem; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; letter-spacing: 0.04em; text-transform: uppercase; }
+  .nav-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .admin-nav-btn { margin-left: auto; padding: 0.4rem 0.9rem; background: none; border: 1px solid var(--sand); border-radius: 100px; font-size: 0.72rem; color: var(--text-muted); cursor: pointer; font-family: inherit; letter-spacing: 0.04em; transition: all 0.2s; white-space: nowrap; }
+  .admin-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .admin-nav-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-  .nav-btn {
-    padding: 0.85rem 1.1rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-decoration: none;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
+  /* MAIN */
+  .main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .section { margin-bottom: 3.5rem; scroll-margin-top: 70px; animation: fadeUp 0.5s ease both; }
+  .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--sand); }
+  .section-emoji { font-size: 1.4rem; line-height: 1; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; color: var(--dark); letter-spacing: -0.01em; }
+  .section-admin-btns { margin-left: auto; display: flex; gap: .5rem; }
 
-  .nav-btn:hover, .nav-btn.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  /* ─── MAIN ─── */
-  .main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 4rem;
-  }
-
-  /* ─── SECTION ─── */
-  .section {
-    margin-bottom: 3.5rem;
-    scroll-margin-top: 70px;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.9rem;
-    border-bottom: 1px solid var(--sand);
-  }
-
-  .section-emoji {
-    font-size: 1.4rem;
-    line-height: 1;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.55rem;
-    font-weight: 400;
-    color: var(--dark);
-    letter-spacing: -0.01em;
-  }
-
-  /* ─── GRID ─── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.2rem;
-  }
-
-  @media (max-width: 480px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.85rem;
-    }
-  }
-
-  /* ─── CARD ─── */
-  .card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    border: 1px solid var(--sand);
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .card-img-wrap {
-    aspect-ratio: 3/4;
-    background: var(--accent-light);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .card-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .card:hover .card-img-wrap img {
-    transform: scale(1.04);
-  }
-
-  .card-img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: var(--taupe);
-    background: linear-gradient(135deg, var(--accent-light) 0%, var(--sand) 100%);
-  }
-
-  .card-body {
-    padding: 0.85rem 0.9rem 1rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .card-name {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--dark);
-    line-height: 1.35;
-  }
-
-  .card-author {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    font-style: italic;
-  }
-
-  .card-footer {
-    margin-top: auto;
-    padding-top: 0.6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .coupon-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.7rem;
-    font-weight: 500;
-    background: var(--accent-light);
-    color: var(--brown);
-    padding: 0.2rem 0.55rem;
-    border-radius: 100px;
-    letter-spacing: 0.03em;
-    border: 1px solid rgba(196,149,106,0.3);
-    align-self: flex-start;
-  }
-
-  .no-link-tag {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    font-style: italic;
-  }
-
-  .shop-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    padding: 0.5rem 0.75rem;
-    background: var(--dark);
-    color: white;
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background 0.2s;
-    margin-top: 0.5rem;
-    letter-spacing: 0.02em;
-  }
-
+  /* GRID / CARDS */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; }
+  @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; } }
+  .card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .card.editable { cursor: pointer; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .card-img-wrap { aspect-ratio: 3/4; background: var(--accent-light); overflow: hidden; position: relative; }
+  .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .card:hover .card-img-wrap img { transform: scale(1.04); }
+  .card-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--taupe); background: linear-gradient(135deg, var(--accent-light) 0%, var(--sand) 100%); }
+  .card-body { padding: 0.85rem 0.9rem 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+  .card-name { font-size: 0.85rem; font-weight: 500; color: var(--dark); line-height: 1.35; }
+  .card-author { font-size: 0.75rem; color: var(--text-muted); font-style: italic; }
+  .card-footer { margin-top: auto; padding-top: 0.6rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .coupon-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; font-weight: 500; background: var(--accent-light); color: var(--brown); padding: 0.2rem 0.55rem; border-radius: 100px; letter-spacing: 0.03em; border: 1px solid rgba(196,149,106,0.3); align-self: flex-start; }
+  .no-link-tag { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
+  .shop-btn { display: flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.5rem 0.75rem; background: var(--dark); color: white; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 500; text-decoration: none; transition: background 0.2s; margin-top: 0.5rem; letter-spacing: 0.02em; }
   .shop-btn:hover { background: var(--accent); }
+  .card-no-link .shop-btn { background: var(--sand); color: var(--text-muted); cursor: default; pointer-events: none; }
 
-  .card-no-link .shop-btn {
-    background: var(--sand);
-    color: var(--text-muted);
-    cursor: default;
-    pointer-events: none;
-  }
-
-  /* ─── EDIT BANNER ─── */
-  .edit-banner {
-    background: linear-gradient(135deg, var(--accent-light), #FAEEE0);
-    border: 1px dashed var(--accent);
-    border-radius: var(--radius);
-    padding: 1.2rem 1.5rem;
-    margin-bottom: 2.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
+  /* EDIT BANNER (admin only) */
+  .edit-banner { background: linear-gradient(135deg, var(--accent-light), #FAEEE0); border: 1px dashed var(--accent); border-radius: var(--radius); padding: 1.2rem 1.5rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
   .edit-banner-icon { font-size: 1.5rem; }
-
-  .edit-banner-text {
-    flex: 1;
-    font-size: 0.85rem;
-    color: var(--brown);
-    min-width: 200px;
-  }
-
-  .edit-banner-text strong {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--dark);
-    margin-bottom: 0.2rem;
-  }
-
-  .edit-btn {
-    padding: 0.5rem 1.1rem;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 100px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
-
+  .edit-banner-text { flex: 1; font-size: 0.85rem; color: var(--brown); min-width: 200px; }
+  .edit-banner-text strong { display: block; font-size: 0.9rem; color: var(--dark); margin-bottom: 0.2rem; }
+  .edit-btn { padding: 0.5rem 1.1rem; background: var(--accent); color: white; border: none; border-radius: 100px; font-size: 0.8rem; font-weight: 500; cursor: pointer; font-family: inherit; transition: opacity 0.2s; white-space: nowrap; }
   .edit-btn:hover { opacity: 0.85; }
+  .sec-btn { background: var(--accent-light); color: var(--brown); border: none; border-radius: 100px; padding: .3rem .8rem; font-size: .75rem; cursor: pointer; font-family: inherit; }
+  .sec-del { background: none; border: none; font-size: .9rem; cursor: pointer; color: var(--taupe); }
 
-  /* ─── MODAL ─── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(42,31,26,0.5);
-    z-index: 1000;
-    padding: 1rem;
-    overflow-y: auto;
-    align-items: flex-start;
-    justify-content: center;
-  }
+  /* LOGIN OVERLAY */
+  .login-overlay { display: none; position: fixed; inset: 0; background: rgba(42,31,26,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
+  .login-overlay.open { display: flex; }
+  .login-box { background: var(--warm-white); border-radius: var(--radius); padding: 2.5rem 2rem; width: 100%; max-width: 360px; border: 1px solid var(--sand); text-align: center; }
+  .login-box h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--dark); margin-bottom: 0.4rem; }
+  .login-box p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .login-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--sand); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.95rem; outline: none; text-align: center; letter-spacing: 0.1em; margin-bottom: 0.75rem; transition: border-color 0.2s; }
+  .login-input:focus { border-color: var(--accent); }
+  .login-input.error { border-color: #e07070; animation: shake 0.3s ease; }
+  .login-submit { width: 100%; padding: 0.75rem; background: var(--dark); color: white; border: none; border-radius: 100px; font-size: 0.9rem; font-weight: 500; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  .login-submit:hover { background: var(--accent); }
+  .login-cancel { margin-top: 0.75rem; background: none; border: none; font-size: 0.8rem; color: var(--text-muted); cursor: pointer; font-family: inherit; }
+  .login-cancel:hover { color: var(--dark); }
+  .login-error { font-size: 0.8rem; color: #c0504d; margin-bottom: 0.5rem; display: none; }
 
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(42,31,26,0.5); z-index: 1000; padding: 1rem; overflow-y: auto; align-items: flex-start; justify-content: center; }
   .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: var(--warm-white);
-    border-radius: var(--radius);
-    padding: 2rem;
-    width: 100%;
-    max-width: 560px;
-    margin: auto;
-    position: relative;
-    border: 1px solid var(--sand);
-  }
-
-  .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--dark);
-    margin-bottom: 1.5rem;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1.25rem;
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: var(--taupe);
-    line-height: 1;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    margin-bottom: 1rem;
-  }
-
-  .form-group label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .form-group input, .form-group select, .form-group textarea {
-    padding: 0.65rem 0.9rem;
-    border: 1px solid var(--sand);
-    border-radius: var(--radius-sm);
-    background: white;
-    color: var(--dark);
-    font-family: inherit;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--accent);
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
-
-  @media (max-width: 480px) {
-    .form-row { grid-template-columns: 1fr; }
-  }
-
-  .form-actions {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
-  }
-
-  .btn-cancel {
-    padding: 0.6rem 1.2rem;
-    background: var(--sand);
-    color: var(--text-muted);
-    border: none;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .btn-save {
-    padding: 0.6rem 1.4rem;
-    background: var(--dark);
-    color: white;
-    border: none;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.2s;
-  }
-
+  .modal { background: var(--warm-white); border-radius: var(--radius); padding: 2rem; width: 100%; max-width: 560px; margin: auto; position: relative; border: 1px solid var(--sand); }
+  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--dark); margin-bottom: 1.5rem; }
+  .modal-close { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--taupe); line-height: 1; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .form-group input, .form-group select { padding: 0.65rem 0.9rem; border: 1px solid var(--sand); border-radius: var(--radius-sm); background: white; color: var(--dark); font-family: inherit; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+  .form-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; }
+  .btn-cancel { padding: 0.6rem 1.2rem; background: var(--sand); color: var(--text-muted); border: none; border-radius: 100px; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+  .btn-save { padding: 0.6rem 1.4rem; background: var(--dark); color: white; border: none; border-radius: 100px; font-size: 0.85rem; font-weight: 500; cursor: pointer; font-family: inherit; transition: background 0.2s; }
   .btn-save:hover { background: var(--accent); }
 
-  /* ─── FOOTER ─── */
-  footer {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    border-top: 1px solid var(--sand);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
+  footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--sand); font-size: 0.8rem; color: var(--text-muted); }
 
-  /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .section { animation: fadeUp 0.5s ease both; }
-  .section:nth-child(2) { animation-delay: 0.05s; }
-  .section:nth-child(3) { animation-delay: 0.10s; }
-  .section:nth-child(4) { animation-delay: 0.15s; }
-  .section:nth-child(5) { animation-delay: 0.20s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header class="hero">
-  <div class="avatar-wrap" id="avatarWrap">
-    <!-- Coloque sua foto aqui: substitua o emoji pelo conteúdo abaixo
-    <img src="SUA-FOTO.jpg" alt="Foto de perfil"> -->
-    ✨
-  </div>
-  <h1 class="hero-name" id="heroName">Palloma Gitahy</h1>
-  <p class="hero-handle" id="heroHandle">@palloma.git</p>
+  <div class="avatar-wrap" id="avatarWrap">✨</div>
+  <h1 class="hero-name" id="heroName">Seu Nome</h1>
+  <p class="hero-handle" id="heroHandle">@seu.arroba</p>
   <p class="hero-bio" id="heroBio">Tudo que uso, amo e indico no meu dia a dia 🤍</p>
   <div class="social-links">
-    <a class="social-btn" href="https://instagram.com/" target="_blank" id="instaLink">
+    <a class="social-btn" href="#" target="_blank" id="instaLink">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       Instagram
     </a>
-    <a class="social-btn" href="https://www.tiktok.com/@palloma.git" target="_blank" id="tiktokLink">
+    <a class="social-btn" href="#" target="_blank" id="tiktokLink">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>
       TikTok
     </a>
-    <a class="social-btn" href="https://youtube.com/" target="_blank" id="youtubeLink">
+    <a class="social-btn" href="#" target="_blank" id="youtubeLink">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19a2.74 2.74 0 0 0-1.93-1.93C18 5 12 5 12 5s-6 0-7.65.26a2.74 2.74 0 0 0-1.93 1.93C2.16 8.85 2.16 12 2.16 12s0 3.15.26 4.81a2.74 2.74 0 0 0 1.93 1.93C6 19 12 19 12 19s6 0 7.65-.26a2.74 2.74 0 0 0 1.93-1.93c.26-1.66.26-4.81.26-4.81s0-3.15-.26-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
       YouTube
     </a>
@@ -576,57 +145,57 @@
 
 <!-- MAIN -->
 <main class="main">
-
-  <div class="edit-banner">
+  <div class="edit-banner" id="editBanner" style="display:none;">
     <span class="edit-banner-icon">✏️</span>
     <div class="edit-banner-text">
-      <strong>Personalize seu site</strong>
-      Adicione seus produtos, livros e indicações facilmente
+      <strong>Modo Administrador</strong>
+      Clique nos cards para editar · Adicione itens e categorias
     </div>
     <button class="edit-btn" onclick="openAddModal()">+ Adicionar item</button>
+    <button class="edit-btn" style="background:var(--brown);margin-left:0;" onclick="logout()">Sair</button>
   </div>
-
   <div id="sectionsContainer"></div>
-
 </main>
 
-<footer>
-  <p>© 2026 · Palloma Gitahy </p>
-</footer>
+<footer><p>© 2026 · Feito com 🤍</p></footer>
 
-<!-- MODAL -->
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h2>🔐 Área Admin</h2>
+    <p>Digite sua senha para editar o site</p>
+    <p class="login-error" id="loginError">Senha incorreta. Tente novamente.</p>
+    <input class="login-input" type="password" id="loginInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-submit" onclick="doLogin()">Entrar</button>
+    <br><button class="login-cancel" onclick="closeLogin()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL EDIÇÃO -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <h2 class="modal-title" id="modalTitle">Adicionar item</h2>
-
     <div class="form-group">
       <label>Categoria</label>
-      <select id="itemCategory">
-        <option value="">Selecione ou crie uma categoria…</option>
-      </select>
+      <select id="itemCategory"></select>
     </div>
-
     <div class="form-group" id="newCatGroup" style="display:none;">
       <label>Nome da nova categoria</label>
-      <input type="text" id="newCatName" placeholder="Ex: Cozinha, Fitness, Cursos…">
+      <input type="text" id="newCatName" placeholder="Ex: Cozinha, Fitness…">
     </div>
-
     <div class="form-group" id="newCatEmojiGroup" style="display:none;">
       <label>Emoji da categoria</label>
       <input type="text" id="newCatEmoji" placeholder="Ex: 🍳">
     </div>
-
     <div class="form-group">
       <label>Nome do produto / livro</label>
       <input type="text" id="itemName" placeholder="Ex: Livro Atomic Habits">
     </div>
-
     <div class="form-group">
       <label>Autor / marca (opcional)</label>
       <input type="text" id="itemAuthor" placeholder="Ex: James Clear">
     </div>
-
     <div class="form-row">
       <div class="form-group">
         <label>Cupom (opcional)</label>
@@ -637,165 +206,193 @@
         <input type="text" id="itemImage" placeholder="https://...">
       </div>
     </div>
-
     <div class="form-group">
       <label>Link do produto</label>
-      <input type="text" id="itemLink" placeholder="https://amzn.to/... (deixe vazio se não tiver)">
+      <input type="text" id="itemLink" placeholder="https://amzn.to/...">
     </div>
-
+    <!-- Botão deletar (só aparece ao editar) -->
+    <div id="deleteItemRow" style="display:none;margin-top:0.5rem;">
+      <button onclick="deleteCurrentItem()" style="background:none;border:none;color:#c0504d;font-size:0.82rem;cursor:pointer;font-family:inherit;">🗑 Excluir este item</button>
+    </div>
     <div class="form-actions">
       <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn-save" onclick="saveItem()">Salvar item</button>
+      <button class="btn-save" onclick="saveItem()">Salvar</button>
     </div>
   </div>
 </div>
 
 <script>
-// ─── DADOS INICIAIS ─────────────────────────────────────────────────────────
+// ─── SENHA ───────────────────────────────────────────────────────────────────
+// Para trocar a senha, altere apenas este valor:
+const ADMIN_PASSWORD = 'minhasenha123';
+
+// ─── AVATAR ──────────────────────────────────────────────────────────────────
+const AVATAR_B64 = 'data:image/jpeg;base64,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';
+
+// ─── DADOS PADRÃO ────────────────────────────────────────────────────────────
 const defaultData = {
   profile: {
-    name: 'Palloma Gitahy',
-    handle: '@palloma.git',
+    name: 'Seu Nome', handle: '@seu.arroba',
     bio: 'Tudo que uso, amo e indico no meu dia a dia 🤍',
-    instagram: 'https://instagram.com/',
-    tiktok: 'https://www.tiktok.com/@palloma.git',
-    youtube: 'https://youtube.com/'
+    instagram: 'https://instagram.com/', tiktok: 'https://tiktok.com/',
+    youtube: 'https://youtube.com/', avatar: AVATAR_B64
   },
   sections: [
-    {
-      id: 'livros',
-      title: 'Livros',
-      emoji: '📚',
-      items: [
-        { id: 1, name: 'Atomic Habits', author: 'James Clear', link: 'https://amzn.to/3N2eLUq', coupon: '', image: '' },
-        { id: 2, name: 'O Poder do Hábito', author: 'Charles Duhigg', link: 'https://amzn.to/4cs7PKV', coupon: '', image: '' },
-        { id: 3, name: 'Essencialismo', author: 'Greg McKeown', link: '', coupon: '', image: '' },
-        { id: 4, name: 'A Arte de Fazer Acontecer', author: 'David Allen', link: 'https://amzn.to/4rIeRQa', coupon: '', image: '' }
-      ]
-    },
-    {
-      id: 'papelaria',
-      title: 'Papelaria',
-      emoji: '✍️',
-      items: [
-        { id: 5, name: 'Planner Favorito', author: '', link: 'https://www.studies.com.br', coupon: 'SEUNOME10', image: '' },
-        { id: 6, name: 'Caneta Brush', author: '', link: 'https://amzn.to/4l4LANk', coupon: '', image: '' },
-        { id: 7, name: 'Bloco de Notas A5', author: '', link: '', coupon: '', image: '' }
-      ]
-    },
-    {
-      id: 'tecnologia',
-      title: 'Tecnologia',
-      emoji: '💻',
-      items: [
-        { id: 8, name: 'Suporte para notebook', author: '', link: 'https://amzn.to/46BPRSh', coupon: '', image: '' },
-        { id: 9, name: 'Mousepad grande', author: '', link: 'https://amzn.to/40ow0mh', coupon: '', image: '' },
-        { id: 10, name: 'Fone sem fio', author: 'Sony', link: 'https://amzn.to/3Ncjjrx', coupon: '', image: '' }
-      ]
-    }
+    { id: 'livros', title: 'Livros', emoji: '📚', items: [
+      { id: 1, name: 'Atomic Habits', author: 'James Clear', link: 'https://amzn.to/3N2eLUq', coupon: '', image: '' },
+      { id: 2, name: 'O Poder do Hábito', author: 'Charles Duhigg', link: 'https://amzn.to/4cs7PKV', coupon: '', image: '' },
+      { id: 3, name: 'Essencialismo', author: 'Greg McKeown', link: '', coupon: '', image: '' }
+    ]},
+    { id: 'papelaria', title: 'Papelaria', emoji: '✍️', items: [
+      { id: 4, name: 'Planner Favorito', author: '', link: 'https://www.studies.com.br', coupon: 'SEUNOME10', image: '' },
+      { id: 5, name: 'Caneta Brush', author: '', link: 'https://amzn.to/4l4LANk', coupon: '', image: '' }
+    ]},
+    { id: 'tecnologia', title: 'Tecnologia', emoji: '💻', items: [
+      { id: 6, name: 'Suporte para notebook', author: '', link: 'https://amzn.to/46BPRSh', coupon: '', image: '' },
+      { id: 7, name: 'Fone sem fio', author: 'Sony', link: 'https://amzn.to/3Ncjjrx', coupon: '', image: '' }
+    ]}
   ]
 };
 
-// ─── ESTADO ─────────────────────────────────────────────────────────────────
+// ─── ESTADO ──────────────────────────────────────────────────────────────────
 let data = JSON.parse(localStorage.getItem('favoritos_data') || 'null') || defaultData;
+if (data.profile && !data.profile.avatar) data.profile.avatar = AVATAR_B64;
+let isAdmin = sessionStorage.getItem('admin_ok') === '1';
 let editingItemId = null;
 let editingSectionId = null;
 
-// ─── RENDER ──────────────────────────────────────────────────────────────────
-function render() {
-  renderProfile();
-  renderNav();
-  renderSections();
+// ─── AUTH ────────────────────────────────────────────────────────────────────
+function openLogin() {
+  document.getElementById('loginOverlay').classList.add('open');
+  document.getElementById('loginInput').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('loginInput').classList.remove('error');
+  setTimeout(() => document.getElementById('loginInput').focus(), 100);
 }
+function closeLogin() { document.getElementById('loginOverlay').classList.remove('open'); }
+function doLogin() {
+  const val = document.getElementById('loginInput').value;
+  if (val === ADMIN_PASSWORD) {
+    isAdmin = true;
+    sessionStorage.setItem('admin_ok', '1');
+    closeLogin(); render();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    const inp = document.getElementById('loginInput');
+    inp.classList.add('error');
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('error'), 400);
+  }
+}
+function logout() {
+  isAdmin = false;
+  sessionStorage.removeItem('admin_ok');
+  render();
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function render() { renderProfile(); renderNav(); renderSections(); renderAdminUI(); }
 
 function renderProfile() {
   const p = data.profile;
   document.getElementById('heroName').textContent = p.name;
   document.getElementById('heroHandle').textContent = p.handle;
   document.getElementById('heroBio').textContent = p.bio;
-  document.getElementById('instaLink').href = p.instagram || 'https://instagram.com/';
-  document.getElementById('tiktokLink').href = p.tiktok || 'https://www.tiktok.com/@palloma.git';
-  document.getElementById('youtubeLink').href = p.youtube || 'https://youtube.com/';
-  document.getElementById('avatarWrap').innerHTML = p.avatar
-    ? `<img src="${p.avatar}" alt="Foto de perfil">`
-    : p.name.trim().charAt(0).toUpperCase() || '✨';
+  document.getElementById('instaLink').href = p.instagram || '#';
+  document.getElementById('tiktokLink').href = p.tiktok || '#';
+  document.getElementById('youtubeLink').href = p.youtube || '#';
+  const av = document.getElementById('avatarWrap');
+  av.innerHTML = p.avatar
+    ? '<img src="' + p.avatar + '" alt="Foto de perfil">'
+    : (p.name || '✨').trim().charAt(0).toUpperCase();
+}
+
+function renderAdminUI() {
+  document.getElementById('editBanner').style.display = isAdmin ? 'flex' : 'none';
+  // Botão admin na nav
+  const existing = document.getElementById('adminNavBtn');
+  if (existing) existing.remove();
+  const nav = document.getElementById('navInner');
+  const btn = document.createElement('button');
+  btn.id = 'adminNavBtn';
+  btn.className = 'admin-nav-btn' + (isAdmin ? ' active' : '');
+  btn.textContent = isAdmin ? '⚙ Admin ativo' : '⚙ Admin';
+  btn.onclick = isAdmin ? logout : openLogin;
+  nav.appendChild(btn);
 }
 
 function renderNav() {
-  const nav = document.getElementById('navInner');
-  nav.innerHTML = data.sections.map(s =>
-    `<a class="nav-btn" href="#sec-${s.id}">${s.emoji} ${s.title}</a>`
+  document.getElementById('navInner').innerHTML = data.sections.map(s =>
+    '<a class="nav-btn" href="#sec-' + s.id + '">' + s.emoji + ' ' + s.title + '</a>'
   ).join('');
 }
 
 function renderSections() {
-  const container = document.getElementById('sectionsContainer');
-  container.innerHTML = data.sections.map(section => `
-    <section class="section" id="sec-${section.id}">
-      <div class="section-header">
-        <span class="section-emoji">${section.emoji}</span>
-        <h2 class="section-title">${section.title}</h2>
-        <div style="margin-left:auto;display:flex;gap:.5rem;">
-          <button onclick="openAddModal('${section.id}')" style="background:var(--accent-light);color:var(--brown);border:none;border-radius:100px;padding:.3rem .8rem;font-size:.75rem;cursor:pointer;font-family:inherit;">+ Item</button>
-          <button onclick="deleteSection('${section.id}')" style="background:none;border:none;font-size:.9rem;cursor:pointer;color:var(--taupe);">🗑</button>
-        </div>
-      </div>
-      <div class="grid">
-        ${section.items.map(item => renderCard(item, section.id)).join('')}
-        <div class="card" onclick="openAddModal('${section.id}')" style="border:1.5px dashed var(--sand);background:transparent;min-height:220px;align-items:center;justify-content:center;gap:.5rem;">
-          <span style="font-size:1.8rem;color:var(--taupe);">+</span>
-          <span style="font-size:.78rem;color:var(--text-muted);">Adicionar</span>
-        </div>
-      </div>
-    </section>
-  `).join('');
+  document.getElementById('sectionsContainer').innerHTML = data.sections.map(section => {
+    const adminBtns = isAdmin
+      ? '<div class="section-admin-btns">' +
+          '<button class="sec-btn" onclick="openAddModal(\'' + section.id + '\')">+ Item</button>' +
+          '<button class="sec-del" onclick="deleteSection(\'' + section.id + '\')">🗑</button>' +
+        '</div>'
+      : '';
+    const addCard = isAdmin
+      ? '<div class="card" onclick="openAddModal(\'' + section.id + '\')" style="border:1.5px dashed var(--sand);background:transparent;min-height:220px;align-items:center;justify-content:center;gap:.5rem;cursor:pointer;">' +
+          '<span style="font-size:1.8rem;color:var(--taupe);">+</span>' +
+          '<span style="font-size:.78rem;color:var(--text-muted);">Adicionar</span>' +
+        '</div>'
+      : '';
+    return '<section class="section" id="sec-' + section.id + '">' +
+      '<div class="section-header">' +
+        '<span class="section-emoji">' + section.emoji + '</span>' +
+        '<h2 class="section-title">' + section.title + '</h2>' +
+        adminBtns +
+      '</div>' +
+      '<div class="grid">' +
+        section.items.map(item => renderCard(item, section.id)).join('') +
+        addCard +
+      '</div>' +
+    '</section>';
+  }).join('');
 }
 
 function renderCard(item, sectionId) {
   const hasLink = item.link && item.link.trim() !== '';
-  const imgContent = item.image
-    ? `<img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-placeholder>🛍️</div>'">`
-    : `<div class="card-img-placeholder">${getCategoryEmoji(sectionId)}</div>`;
-
-  return `
-    <div class="card ${hasLink ? '' : 'card-no-link'}" onclick="editItem('${sectionId}', ${item.id})" title="Clique para editar">
-      <div class="card-img-wrap">${imgContent}</div>
-      <div class="card-body">
-        <div class="card-name">${item.name}</div>
-        ${item.author ? `<div class="card-author">${item.author}</div>` : ''}
-        <div class="card-footer">
-          ${item.coupon ? `<span class="coupon-badge">🏷 ${item.coupon}</span>` : ''}
-          ${hasLink
-            ? `<a class="shop-btn" href="${item.link}" target="_blank" onclick="event.stopPropagation()">Ver produto →</a>`
-            : `<span class="no-link-tag">Sem link disponível</span>`}
-        </div>
-      </div>
-    </div>`;
-}
-
-function getCategoryEmoji(sectionId) {
   const sec = data.sections.find(s => s.id === sectionId);
-  return sec ? sec.emoji : '✨';
+  const emoji = sec ? sec.emoji : '✨';
+  const imgContent = item.image
+    ? '<img src="' + item.image + '" alt="' + item.name + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=card-img-placeholder>' + emoji + '</div>\'">'
+    : '<div class="card-img-placeholder">' + emoji + '</div>';
+  const editAttr = isAdmin ? ' class="card editable" onclick="editItem(\'' + sectionId + '\',' + item.id + ')" title="Clique para editar"' : ' class="card"';
+  return '<div' + editAttr + '>' +
+    '<div class="card-img-wrap">' + imgContent + '</div>' +
+    '<div class="card-body">' +
+      '<div class="card-name">' + item.name + '</div>' +
+      (item.author ? '<div class="card-author">' + item.author + '</div>' : '') +
+      '<div class="card-footer">' +
+        (item.coupon ? '<span class="coupon-badge">🏷 ' + item.coupon + '</span>' : '') +
+        (hasLink ? '<a class="shop-btn" href="' + item.link + '" target="_blank" onclick="event.stopPropagation()">Ver produto →</a>'
+                 : '<span class="no-link-tag">Sem link disponível</span>') +
+      '</div>' +
+    '</div>' +
+  '</div>';
 }
 
-// ─── MODAL ───────────────────────────────────────────────────────────────────
+// ─── MODAL EDIÇÃO ─────────────────────────────────────────────────────────────
 function openAddModal(sectionId) {
-  editingItemId = null;
-  editingSectionId = sectionId || null;
+  if (!isAdmin) return;
+  editingItemId = null; editingSectionId = sectionId || null;
   document.getElementById('modalTitle').textContent = 'Adicionar item';
-  clearForm();
-  populateCategorySelect(sectionId);
+  document.getElementById('deleteItemRow').style.display = 'none';
+  clearForm(); populateCategorySelect(sectionId);
   document.getElementById('modalOverlay').classList.add('open');
 }
-
 function editItem(sectionId, itemId) {
-  const section = data.sections.find(s => s.id === sectionId);
-  if (!section) return;
-  const item = section.items.find(i => i.id === itemId);
-  if (!item) return;
-  editingItemId = itemId;
-  editingSectionId = sectionId;
+  if (!isAdmin) return;
+  const section = data.sections.find(s => s.id === sectionId); if (!section) return;
+  const item = section.items.find(i => i.id === itemId); if (!item) return;
+  editingItemId = itemId; editingSectionId = sectionId;
   document.getElementById('modalTitle').textContent = 'Editar item';
+  document.getElementById('deleteItemRow').style.display = 'block';
   populateCategorySelect(sectionId);
   document.getElementById('itemName').value = item.name || '';
   document.getElementById('itemAuthor').value = item.author || '';
@@ -804,51 +401,39 @@ function editItem(sectionId, itemId) {
   document.getElementById('itemLink').value = item.link || '';
   document.getElementById('modalOverlay').classList.add('open');
 }
-
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
-  editingItemId = null;
-  editingSectionId = null;
+  editingItemId = null; editingSectionId = null;
 }
-
 function clearForm() {
   ['itemName','itemAuthor','itemCoupon','itemImage','itemLink','newCatName','newCatEmoji'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
+    const el = document.getElementById(id); if (el) el.value = '';
   });
   document.getElementById('newCatGroup').style.display = 'none';
   document.getElementById('newCatEmojiGroup').style.display = 'none';
 }
-
 function populateCategorySelect(selectedId) {
   const sel = document.getElementById('itemCategory');
   sel.innerHTML = '<option value="">Selecione uma categoria…</option>';
   data.sections.forEach(s => {
     const opt = document.createElement('option');
-    opt.value = s.id;
-    opt.textContent = `${s.emoji} ${s.title}`;
+    opt.value = s.id; opt.textContent = s.emoji + ' ' + s.title;
     if (s.id === selectedId) opt.selected = true;
     sel.appendChild(opt);
   });
   const newOpt = document.createElement('option');
-  newOpt.value = '__new__';
-  newOpt.textContent = '✨ Criar nova categoria';
+  newOpt.value = '__new__'; newOpt.textContent = '✨ Criar nova categoria';
   sel.appendChild(newOpt);
-
   sel.onchange = () => {
     const isNew = sel.value === '__new__';
     document.getElementById('newCatGroup').style.display = isNew ? '' : 'none';
     document.getElementById('newCatEmojiGroup').style.display = isNew ? '' : 'none';
   };
 }
-
 function saveItem() {
   const name = document.getElementById('itemName').value.trim();
   if (!name) { alert('Informe o nome do produto!'); return; }
-
   let sectionId = document.getElementById('itemCategory').value;
-
-  // Criar nova seção se necessário
   if (sectionId === '__new__') {
     const newCatName = document.getElementById('newCatName').value.trim();
     if (!newCatName) { alert('Informe o nome da categoria!'); return; }
@@ -856,50 +441,36 @@ function saveItem() {
     sectionId = newCatName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     data.sections.push({ id: sectionId, title: newCatName, emoji: newEmoji, items: [] });
   }
-
   if (!sectionId) { alert('Selecione uma categoria!'); return; }
-
-  const section = data.sections.find(s => s.id === sectionId);
-  if (!section) return;
-
+  const section = data.sections.find(s => s.id === sectionId); if (!section) return;
   const itemData = {
-    id: editingItemId || Date.now(),
-    name,
+    id: editingItemId || Date.now(), name,
     author: document.getElementById('itemAuthor').value.trim(),
     coupon: document.getElementById('itemCoupon').value.trim(),
     image: document.getElementById('itemImage').value.trim(),
     link: document.getElementById('itemLink').value.trim()
   };
-
-  if (editingItemId) {
-    // Editar existente — remove da seção atual e adiciona na nova
-    data.sections.forEach(s => {
-      s.items = s.items.filter(i => i.id !== editingItemId);
-    });
-  }
-
+  if (editingItemId) data.sections.forEach(s => { s.items = s.items.filter(i => i.id !== editingItemId); });
   section.items.push(itemData);
-  saveData();
-  closeModal();
+  saveData(); closeModal();
 }
-
+function deleteCurrentItem() {
+  if (!editingItemId) return;
+  if (!confirm('Excluir este item?')) return;
+  data.sections.forEach(s => { s.items = s.items.filter(i => i.id !== editingItemId); });
+  saveData(); closeModal();
+}
 function deleteSection(sectionId) {
   if (!confirm('Deletar esta seção e todos os itens dela?')) return;
   data.sections = data.sections.filter(s => s.id !== sectionId);
   saveData();
 }
+function saveData() { localStorage.setItem('favoritos_data', JSON.stringify(data)); render(); }
 
-function saveData() {
-  localStorage.setItem('favoritos_data', JSON.stringify(data));
-  render();
-}
+// Fechar modal ao clicar fora
+document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.getElementById('loginOverlay').addEventListener('click', function(e) { if (e.target === this) closeLogin(); });
 
-// ─── FECHAR MODAL AO CLICAR FORA ─────────────────────────────────────────────
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
 render();
 </script>
 </body>
